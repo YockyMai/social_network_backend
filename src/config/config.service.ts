@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { User } from '../user/user.entity';
+import { User } from '../db/user/user.entity';
 
 require('dotenv').config({ path: `.${process.env.NODE_ENV}.env` });
 

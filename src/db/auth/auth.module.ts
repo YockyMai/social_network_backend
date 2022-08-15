@@ -6,9 +6,13 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { MailService } from '../mailer/mail.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '../user/user.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([User]),
     UserModule,
     PassportModule,
     JwtModule.register({
@@ -16,7 +20,7 @@ import { JwtStrategy } from './jwt.strategy';
       secret: process.env.JWT_SECRET_KEY,
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, MailService],
   controllers: [AuthController],
 })
 export class AuthModule {}
